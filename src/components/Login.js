@@ -20,7 +20,7 @@ const Login = (props) => {
         const response = await login(emailRef.current.value, passwordRef.current.value)
         console.log(response)
         if(response.details == "Invalid username/password"){
-            setError("Failed to log in")
+            setError("Invalid username/password")
         } else {
             navigate("/dashboard")
         }
