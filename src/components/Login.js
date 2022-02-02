@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import store from "../store"
 
 const Login = (props) => {
     const emailRef = useRef()
@@ -22,6 +23,13 @@ const Login = (props) => {
         if(response.details == "Invalid username/password"){
             setError("Invalid username/password")
         } else {
+            store.dispatch({
+                type: "storeAccess",
+                payload: {
+                    access: response.access
+                }
+            });
+            console.log(store.getState());
             navigate("/dashboard")
         }
         } catch {
