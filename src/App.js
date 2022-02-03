@@ -5,7 +5,8 @@ import { Container } from 'react-bootstrap'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Dashboard from "./components/Dashboard2";
 import Login from "./components/Login";
-import Error from './components/Error'
+import MismatchError from './components/MismatchError'
+import invalidTokenError from './components/invalidTokenError'
 import { AuthProvider } from "./contexts/AuthContext";
 // import ErrorPage from "./Pages/ErrorPage";
 
@@ -23,7 +24,8 @@ const  App = () => {
             <Route path = "/signup" element = {<Signup />}/>
             <Route path = "/" element = {<Login />}/>
             <Route path = "/dashboard" element = {<Dashboard />}/>
-            <Route path = "/error" element = {<Error />}/>
+            <Route path = "/mismatcherror" element = {<MismatchError />}/>
+            <Route path = "/invaliderror" element = {<invalidTokenError />}/>
             {/* <Route path = "*" element = {<ErrorPage />}/> */}
           </Routes>
         </Router> 

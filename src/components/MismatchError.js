@@ -32,7 +32,7 @@ const NotFound = () => (
             color="textPrimary"
             variant="subtitle2"
           >
-            Authorization Failed, please try again.
+            Authorization Failed, mismatch account permission. Select all permissions and try again. 
           </Typography>
           <Box sx={{ textAlign: 'center' }}>
             <img
@@ -51,6 +51,7 @@ const NotFound = () => (
             startIcon={(<ArrowBackIcon fontSize="small" />)}
             sx={{ mt: 3 }}
             variant="contained"
+
         >
             Go back to authorization
             </Button>
