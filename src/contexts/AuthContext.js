@@ -33,7 +33,8 @@ export function AuthProvider({ children }) {
   async function authorization() {
     const url = 'https://cap.gura.ch/api/tracker/auth'
     const state = store.getState();
-    const authToken = state.access;
+    console.log(state)
+    //const authToken = state.access;
 
     const response = await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -41,7 +42,7 @@ export function AuthProvider({ children }) {
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
-        'Authorization': `Bearer ${authToken}`
+        'Authorization': `Bearer ${state}`
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: 'follow', // manual, *follow, error

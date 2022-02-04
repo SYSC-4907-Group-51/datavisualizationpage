@@ -25,7 +25,8 @@ export default function Dashboard2() {
     try {
     setError("")
     const response = await authorization()
-    console.log(response)
+    console.log(response.authorization_url)
+    window.location.replace(response.authorization_url)
     } catch {
     setError("Failed to authorize")
     }
