@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Dashboard from "./components/Dashboard2";
 import Login from "./components/Login";
 import MismatchError from './components/MismatchError'
-import invalidTokenError from './components/invalidTokenError'
+import InvalidTokenError from './components/InvalidTokenError'
 import { AuthProvider } from "./contexts/AuthContext";
 // import ErrorPage from "./Pages/ErrorPage";
 
@@ -25,7 +25,7 @@ const  App = () => {
             <Route path = "/" element = {<Login />}/>
             <Route path = "/dashboard" element = {<Dashboard />}/>
             <Route path = "/mismatcherror" element = {<MismatchError />}/>
-            <Route path = "/invaliderror" element = {<invalidTokenError />}/>
+            <Route path = "/invaliderror" element = {<InvalidTokenError />}/>
             {/* <Route path = "*" element = {<ErrorPage />}/> */}
           </Routes>
         </Router> 

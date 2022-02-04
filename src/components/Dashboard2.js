@@ -44,6 +44,7 @@ export default function Dashboard2() {
           <Button onClick={handleAuthorization} className="w-100" type="submit">
               Add Tracker
           </Button>
+          {/* <Button onClick = {() => navigate("/invaliderror")} className = "w-100 text" >Demo Error Page</Button> */}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
