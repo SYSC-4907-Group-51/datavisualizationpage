@@ -3,7 +3,9 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import store from "../store"
+// import { store } from "../index";
+import { store } from "../App";
+
 
 const Login = (props) => {
     const emailRef = useRef()
@@ -18,19 +20,49 @@ const Login = (props) => {
 
         try {
         setError("")
+         
         const response = await login(emailRef.current.value, passwordRef.current.value)
         console.log(response)
-        if(response.details == "Invalid username/password"){
+        // whole response in localstorage
+       const response2LS = localStorage.setItem("loginResp",JSON.stringify(response));
+        
+        if(response.status_code !== 200){
+        //  if(response.status_code !== 200){
             setError("Invalid username/password")
         } else {
+            
+            // store.dispatch({
+            //     type: "storeAccess",
+            //     payload: {
+                    
+            //         access: response.data.access
+            //     }
+            // });
+            // store whole response in store 
             store.dispatch({
                 type: "storeAccess",
                 payload: {
-                    access: response.access
+                    data: {
+                        username: response.data.username,
+                        first_name: response.data.first_name,
+                        last_name: response.data.last_name,
+                        email: response.data.email,
+                        created_at: response.data.created_at,
+                        updated_at: response.data.updated_at,
+                        refresh: response.data.refresh,
+                        access: response.data.access,
+
+                    },
+                    status_code: response.status_code
+                    
                 }
             });
             console.log(store.getState());
+            //console.log( "Loggin "+ JSON.stringify(store.getState()));
+            // console.log( "Loggin "+ JSON.stringify(store.payload.access));
             navigate("/dashboard")
+            
+
         }
         } catch {
         setError("Failed to log in")
@@ -43,7 +75,9 @@ const Login = (props) => {
         <Card> 
             <Card.Body>
                 <h2 className = 'text-center mb-4'>Log in</h2>
+
                 {error && <Alert variant="danger">{error}</Alert>}
+                
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id ="username">
                         <Form.Label>Username</Form.Label>
@@ -79,6 +113,8 @@ const Login = (props) => {
                 </Form>
             </Card.Body>
         </Card>
+
+    
         </>
         
     );

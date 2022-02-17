@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { Card, Button, Alert } from "react-bootstrap"
+import { Card, Button, Alert, Navbar } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import Header from "./Header";
 
 export default function Dashboard2() {
   const [error, setError] = useState("")
@@ -34,7 +35,11 @@ export default function Dashboard2() {
 
   return (
     <>
-      <Card>
+    <Navbar>
+        <Header />
+      </Navbar>
+
+      <Card style = {{padding: 70}}>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}

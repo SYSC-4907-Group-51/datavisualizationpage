@@ -9,16 +9,16 @@ const headersData = [
       href: "/share",
     },
     {
-      label: "Goals",
-      href: "/goals",
+      label: "Add tracker",
+      href: "/dashboard",
     },
     {
       label: "My Account",
       href: "/account",
     },
     {
-      label: "Log Out",
-      href: "/logout",
+      label: "Logs",
+      href: "/logs",
     },
   ];
 
