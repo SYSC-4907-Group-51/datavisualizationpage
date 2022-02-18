@@ -1,35 +1,53 @@
-import React from 'react'
+import React, { useRef, useState } from "react"
 import { Form, Button, Card,Navbar} from 'react-bootstrap'
 import Header from './Header';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"
 
 
 
 const Share = (props) => {
     const navigate = useNavigate();
+    const [steps, setSteps] = useState(false)
+    const [heartrate, setHeartRate] = useState(false)
+    const [sleep, setSleep] = useState(false)
+    const [stepsintraday, setStepsIntraday] = useState(false)
+    const [heartrateintraday, setHeartRateIntraday] = useState(false)
+    const [error, setError] = useState("")
+    const { createKey } = useAuth()
 
-    let shareState = {
-        dataShareValues: {
-            steps: false,
-            heartrate: false,
-            sleep: false,
-            stepsintraday: false,
-            heartrateintraday: false
+    // let shareState = {
+    //     dataShareValues: {
+    //         steps: false,
+    //         heartrate: false,
+    //         sleep: false,
+    //         stepsintraday: false,
+    //         heartrateintraday: false
+    //     }
+    // }
+
+    async function handleKey(e) {
+        e.preventDefault();
+
+        try {
+            setError("")
+             
+            const response = await createKey(steps, heartrate, sleep, stepsintraday, heartrateintraday)
+            console.log(response)
+        } catch {
+            setError("Failed to create key")
         }
-    }
-
-    async function createKey() {
         
     }
 
-    const handleCheckbox = event => {
-        console.log(event.target.value);
-        let state = shareState;
-        state.dataShareValues[event.target.value] = event.target.checked;
-        this.setState(state)
-        console.log(state.dataShareValues);
-    }
+    // const handleCheckbox = event => {
+    //     console.log(event.target.value);
+    //     let state = shareState;
+    //     state.dataShareValues[event.target.value] = event.target.checked;
+    //     this.setState(state)
+    //     console.log(state.dataShareValues);
+    // }
     
     return (
         <>
@@ -50,34 +68,19 @@ const Share = (props) => {
                         <label for="accept">
                             <ul>
                                 <li>
-                                    <input onChange = {handleCheckbox } type = "checkbox" 
-                                    name = "dataShareValues" 
-                                    value="steps" 
-                                    checked = {shareState.dataShareValues.steps}/> Share steps
+                                    <input onChange = {(e)=> setSteps(e.target.checked)} type = "checkbox" /> Share steps
                                 </li> 
                                 <li>
-                                    <input onChange = {handleCheckbox} type = "checkbox" 
-                                    name = "dataShareValues" 
-                                    value="heartrate" 
-                                    checked = {shareState.dataShareValues.heartrate}/> Share heart rate
+                                    <input onChange = {(e)=> setHeartRate(e.target.checked)}type = "checkbox" /> Share heart rate
                                 </li>
                                 <li>
-                                    <input onChange = {handleCheckbox} type = "checkbox" 
-                                    name = "dataShareValues" 
-                                    value="sleep" 
-                                    checked = {shareState.dataShareValues.sleep}/> Share sleep data
+                                    <input onChange = {(e)=> setSleep(e.target.checked)} type = "checkbox" /> Share sleep data
                                 </li>
                                 <li>
-                                    <input onChange = {handleCheckbox} type = "checkbox" 
-                                    name = "dataShareValues" 
-                                    value="stepintraday" 
-                                    checked = {shareState.dataShareValues.stepsintraday}/> Share step intraday data
+                                    <input onChange = {(e)=> setStepsIntraday(e.target.checked)} type = "checkbox" /> Share step intraday data
                                 </li>
                                 <li>
-                                    <input onChange = {handleCheckbox} type = "checkbox" 
-                                    name = "dataShareValues" 
-                                    value="heartrateintraday" 
-                                    checked = {shareState.dataShareValues.heartrateintraday}/>Share heart rate intraday data
+                                    <input onChange = {(e)=> setHeartRateIntraday(e.target.checked)} type = "checkbox" />Share heart rate intraday data
                                 </li>
                             </ul>
                         </label>
@@ -96,7 +99,7 @@ const Share = (props) => {
                             </ul>
                         </label> */}
                         {/* <Button style = {{down: 10}} className = "w-100 text">Send Key to Physician</Button> */}
-                        <Button style = {{down: 400}} className = "w-100 text"> Create Key  </Button>
+                        <Button onClick ={handleKey} style = {{down: 400}} className = "w-100 text"> Create Key  </Button>
                         <Form.Control size="lg" type="text" placeholder="Large text" />
                     </div>
                     {/* <Form.Control size="lg" type="text" placeholder="Large text" />

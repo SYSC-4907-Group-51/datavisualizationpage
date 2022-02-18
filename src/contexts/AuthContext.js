@@ -76,6 +76,20 @@ export function AuthProvider({ children }) {
     return await makeRequest('POST', endpoint, true, {})
   }
 
+  async function createKey(steps, heartrate, sleep, stepsintraday, heartrateintraday) {
+    const endpoint = 'visualize/create-key'
+    return await makeRequest('POST', endpoint, true, {
+      "notes": "3tet",
+      "permissions": [
+        steps,
+        heartrate,
+        sleep,
+        stepsintraday,
+        heartrateintraday
+      ]
+    })
+  }
+
 
 
   const value = {
@@ -85,6 +99,7 @@ export function AuthProvider({ children }) {
     deleteAccount,
     authorization,
     logout,
+    createKey
   }
 
   return (
