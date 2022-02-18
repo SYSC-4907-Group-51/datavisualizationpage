@@ -26,8 +26,8 @@ export default function AddTracker() {
     try {
     setError("")
     const response = await authorization()
-    console.log(response.authorization_url)
-    window.location.replace(response.authorization_url)
+    console.log(response.data.authorization_url)
+    window.location.replace(response.data.authorization_url)
     } catch {
     setError("Failed to authorize")
     }
