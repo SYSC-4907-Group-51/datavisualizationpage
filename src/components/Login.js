@@ -60,7 +60,7 @@ const Login = (props) => {
             console.log(store.getState());
             //console.log( "Loggin "+ JSON.stringify(store.getState()));
             // console.log( "Loggin "+ JSON.stringify(store.payload.access));
-            navigate("/dashboard")
+            navigate("/addtracker")
             
 
         }

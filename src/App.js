@@ -3,7 +3,8 @@ import Signup from "./components/Signup";
 import { Container } from 'react-bootstrap'
 //import {BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import Dashboard from "./components/Dashboard2";
+import AddTracker from "./components/AddTracker";
+import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import MismatchError from './components/MismatchError'
 import InvalidTokenError from './components/InvalidTokenError'
@@ -82,7 +83,8 @@ const App = () => {
           <Container className="d-flex algin-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
           >
-            <div className="w-100" style={{ maxWidth: "400px" }}>
+            {/* <div className="w-100" style={{ maxWidth: "400px" }}> */}
+            <div >
               <Router>
                 <Routes>
 
@@ -91,6 +93,7 @@ const App = () => {
                   <Route path="/share" element={<Share />} />
                   <Route path="/account" element={<MyAccount />} />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/addtracker" element={<AddTracker />} />
                   <Route path="/mismatcherror" element={<MismatchError />} />
                   <Route path="/invaliderror" element={<InvalidTokenError />} />
                   <Route path="/logs" element={<Logs />} />

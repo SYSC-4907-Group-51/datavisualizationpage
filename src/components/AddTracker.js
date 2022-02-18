@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import Header from "./Header";
 
-export default function Dashboard2() {
+export default function AddTracker() {
   const [error, setError] = useState("")
   const { currentUser, logout} = useAuth()
   const { authorization } = useAuth()
