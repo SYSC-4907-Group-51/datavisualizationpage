@@ -105,6 +105,11 @@ const Login = (props) => {
             <Card.Body>
                 <h3 className= 'text-center mb-4'>Health Care Provider Key</h3>
                 <Form>
+                <Form.Group id ="username2">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type = "username" required />
+
+                    </Form.Group>
                     <Form.Group id = "key">
                         <Form.Label>Key</Form.Label>
                         <Form.Control type = "key"/>
