@@ -37,14 +37,14 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function signup(username, password, firstname, lastname, email) {
+  async function signup(username, password, first_name, last_name, email) {
     const endpoint = 'user/register'
     
     return await makeRequest('POST', endpoint, false, {
       username,
       password,
-      firstname,
-      lastname,
+      first_name,
+      last_name,
       email
     })
   }
