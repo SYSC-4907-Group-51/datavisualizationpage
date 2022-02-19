@@ -16,23 +16,47 @@ export default function Signup() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
-        try {
-        setError("")
-        setSuccess("")
-        const response = await signup(usernameRef.current.value, passwordRef.current.value, firstnameRef.current.value, lastnameRef.current.value, emailRef.current.value)
-        //history.push("/")
-        console.log(response)
-        if(response.id){
-            setSuccess("Account successfully created")     
-        }else if(response.password){
-            setError("Weak password")
-        } else if(response.username) {
-            setError("Username already exists")
-        } else if(response.email){
-            setError("Email already been used") 
-        } 
-        } catch {
+            
+//         try {
+//         setError("")
+//         setSuccess("")
+//         const response = await signup(usernameRef.current.value, passwordRef.current.value, firstnameRef.current.value, lastnameRef.current.value, emailRef.current.value)
+//         //history.push("/")
+//         console.log(response)
+//         if(response.id){
+//             setSuccess("Account successfully created")     
+//         }else if(response.password){
+//             setError("Weak password")
+//         } else if(response.username) {
+//             setError("Username already exists")
+//         } else if(response.email){
+//             setError("Email already been used") 
+//         } 
+//         }
+        // this is the updated logic to take 
+         try {
+            setError("")
+            setSuccess("")
+            const response = await signup(usernameRef.current.value, passwordRef.current.value, firstnameRef.current.value, lastnameRef.current.value, emailRef.current.value)
+            //history.push("/")
+            // const response2 = response.json()
+            console.log(response)
+            
+            if (response.status_code === 201) {
+                navigate("/");
+            } else {
+                // These error messages aren't working need to be changed
+                // not Paramount 
+                if ( response.json().password) {
+                    setError("Weak password")
+                } else if ( response.json().username) {
+                    setError("Username already exists")
+                } else if ( response.json().email) {
+                    setError("Email already been used")
+                }
+            }
+        }
+        catch {
             setError("Failed to create an account")
         }
     }
