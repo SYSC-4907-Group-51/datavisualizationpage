@@ -49,7 +49,7 @@ const Share = (props) => {
                 }
             }else {
                 setSuccess("Key successfully created, copy and send to physician!") 
-                setKeyVal(response.key)
+                setKeyVal(response.data.key)
             }
         } catch {
             setError("Failed to create key")

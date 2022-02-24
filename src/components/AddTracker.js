@@ -6,8 +6,7 @@ import Header from "./Header";
 
 export default function AddTracker() {
   const [error, setError] = useState("")
-  const { currentUser, logout} = useAuth()
-  const { authorization } = useAuth()
+  const { authorization, currentUser, logout } = useAuth()
   const navigate = useNavigate();
 
   async function handleLogout() {

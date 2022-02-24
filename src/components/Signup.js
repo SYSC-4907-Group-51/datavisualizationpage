@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
-import {Link, useNavigate} from "react-router-dom"
+import {Link, Navigate, useNavigate} from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 
 export default function Signup() {
@@ -9,6 +9,7 @@ export default function Signup() {
     const firstnameRef = useRef()
     const lastnameRef = useRef()
     const emailRef = useRef()
+    const navigate = useNavigate();
     const { signup } = useAuth()
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
@@ -23,13 +24,14 @@ export default function Signup() {
         const response = await signup(usernameRef.current.value, passwordRef.current.value, firstnameRef.current.value, lastnameRef.current.value, emailRef.current.value)
         //history.push("/")
         console.log(response)
-        if(response.id){
-            setSuccess("Account successfully created")     
-        }else if(response.password){
+        if(response.status_code === 201){
+            // setSuccess("Account successfully created")  
+            navigate("/")   
+        }else if(response.data.password){
             setError("Weak password")
-        } else if(response.username) {
+        } else if(response.data.username) {
             setError("Username already exists")
-        } else if(response.email){
+        } else if(response.data.email){
             setError("Email already been used") 
         } 
         } catch {
