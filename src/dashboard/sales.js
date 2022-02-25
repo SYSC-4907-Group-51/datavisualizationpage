@@ -3,9 +3,11 @@ import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ReactEcharts from "echarts-for-react";
+import { store } from "../App";
 
 export const Sales = (props) => {
   const theme = useTheme();
+  const state = store.getState();
 
   return (
     <Card {...props}>
@@ -36,7 +38,7 @@ export const Sales = (props) => {
         <ReactEcharts
       option={{
         title: {
-          text: 'Haoyu Resting Heart Rate',
+          text: `${state.storeAccess[0].data.username} Resting Heart Rate`,
         },
         tooltip: {
           trigger: 'axis',

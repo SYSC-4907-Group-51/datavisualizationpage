@@ -1,10 +1,60 @@
+import React, { useRef, useState } from "react"
 import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import MoneyIcon from '@mui/icons-material/Money';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+import { useAuth } from "../contexts/AuthContext";
 
-export const Budget = (props) => (
-  <Card
+
+export const Budget = (props) => {
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const { intradayData } = useAuth()
+  const step = "step"
+  const dateToday = new Date()
+
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+  async function getSteps(e) {
+    e.preventDefault()
+  
+    try {
+        setError("")
+        const response = await intradayData(step, formatDate(dateToday))
+        console.log(response)
+        if (response.status_code === 200 ){
+            // return response.data.steps
+            return (
+              <Typography
+                color="textPrimary"
+                variant="h4"
+              >
+                {response.data.steps}
+              </Typography>
+            );
+
+        }
+    }
+    catch {
+        setError("Can't get steps")
+    }
+  
+  }
+
+  return (
+    <Card
     sx={{ height: '100%' }}
     {...props}
   >
@@ -26,7 +76,7 @@ export const Budget = (props) => (
             color="textPrimary"
             variant="h4"
           >
-            2,297
+          2,297
           </Typography>
         </Grid>
         <Grid item>
@@ -67,4 +117,7 @@ export const Budget = (props) => (
       </Box>
     </CardContent>
   </Card>
-);
+
+  );
+
+}; 

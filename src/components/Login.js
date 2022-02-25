@@ -84,6 +84,25 @@ const Login = (props) => {
             console.log(response)
             if (response.status_code === 200 ){
                 setSuccess("Health care provider Successfuly logged in ")
+                store.dispatch({
+                    type: "storeHealthAccess",
+                    payload: {
+                        data: {
+                            username: response.data.username,
+                            permissions: response.data.permissions,
+                            available_dates: response.data.available_dates,
+                            // email: response.data.email,
+                            // created_at: response.data.created_at,
+                            // updated_at: response.data.updated_at,
+                            // refresh: response.data.refresh,
+                            access: response.data.access,
+    
+                        },
+                        status_code: response.status_code
+                        
+                    }
+                });
+                console.log(store.getState());
                 navigate("/dashboard")
             }
             else{

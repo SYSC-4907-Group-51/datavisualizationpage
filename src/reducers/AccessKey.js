@@ -14,6 +14,10 @@ export const AccessKey = (state = [], action) => {
             return [
                 state = action.payload,
             ];
+        case "storeHealthAccess":
+            return [
+                state = action.payload,
+            ];
         default:
             return state;
     }

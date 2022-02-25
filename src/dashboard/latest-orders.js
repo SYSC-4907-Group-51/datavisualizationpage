@@ -18,6 +18,7 @@ import {
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { SeverityPill } from '../severity-pill';
 import ReactEcharts from "echarts-for-react";
+import { store } from "../App";
 
 const orders = [
   {
@@ -82,14 +83,16 @@ const orders = [
   }
 ];
 
-export const LatestOrders = (props) => (
-  <Card {...props}>
+export const LatestOrders = (props) =>{
+  const state = store.getState();
+  return (
+    <Card {...props}>
     <CardHeader title="Activity Steps" />
     <CardContent>
     <ReactEcharts
       option={{
         title: {
-          text: 'Haoyu Activity Steps',
+          text: `${state.storeAccess[0].data.username} Activity Steps`,
         },
         tooltip: {
           trigger: 'axis',
@@ -209,4 +212,5 @@ export const LatestOrders = (props) => (
       </Button>
     </Box>
   </Card>
-);
+  );
+}; 

@@ -11,6 +11,7 @@ import { TrafficByDevice } from '../dashboard/traffic-by-device';
 import { DashboardLayout } from '../dashboard-layout';
 import ReactEcharts from "echarts-for-react";
 
+
 const Dashboard = () => (
   <>
     <Head>
