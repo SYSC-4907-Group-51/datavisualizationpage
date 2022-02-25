@@ -36,15 +36,7 @@ export const Budget = (props) => {
         console.log(response)
         if (response.status_code === 200 ){
             // return response.data.steps
-            return (
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
-                {response.data.steps}
-              </Typography>
-            );
-
+            return response.data.steps
         }
     }
     catch {
@@ -76,7 +68,8 @@ export const Budget = (props) => {
             color="textPrimary"
             variant="h4"
           >
-          2,297
+          {getSteps}
+          {/* 2,297 */}
           </Typography>
         </Grid>
         <Grid item>

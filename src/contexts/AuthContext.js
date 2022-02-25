@@ -104,14 +104,14 @@ export function AuthProvider({ children }) {
   }
 
   async function intradayData(value,date) {
-    const endpoint = `visualize/time-series?type=${value}&date=${date}`
-    return await makeRequest('GET',endpoint, false, false)
+    const endpoint = `visualize/intraday?type=${value}&date=${date}`
+    return await makeRequest('GET',endpoint, true, false, {})
 
   }
 
   async function timeSeriesData(value,startDate, endDate) {
     const endpoint = `visualize/time-series?type=${value}&start_date=${startDate}&end_date=${endDate}`
-    return await makeRequest('GET',endpoint, false, false)
+    return await makeRequest('GET',endpoint, true, false, {})
 
   }
 

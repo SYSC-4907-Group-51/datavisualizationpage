@@ -82,23 +82,25 @@ const Login = (props) => {
              
             const response = await healthCareLogin(healthRef.current.value, keyRef.current.value )
             console.log(response)
+            const response2HC = localStorage.setItem("healthCareResp",JSON.stringify(response));
+            const tempHC = JSON.parse(window.localStorage.getItem("healthCareResp"));
             if (response.status_code === 200 ){
                 setSuccess("Health care provider Successfuly logged in ")
                 store.dispatch({
                     type: "storeHealthAccess",
                     payload: {
                         data: {
-                            username: response.data.username,
-                            permissions: response.data.permissions,
-                            available_dates: response.data.available_dates,
+                            username: tempHC.data.username,
+                            permissions: tempHC.data.permissions,
+                            available_dates: tempHC.data.available_dates,
                             // email: response.data.email,
                             // created_at: response.data.created_at,
                             // updated_at: response.data.updated_at,
                             // refresh: response.data.refresh,
-                            access: response.data.access,
+                            access: tempHC.data.access,
     
                         },
-                        status_code: response.status_code
+                        status_code: tempHC.status_code
                         
                     }
                 });
