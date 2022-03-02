@@ -105,7 +105,7 @@ export function AuthProvider({ children }) {
 
   async function intradayData(value,date) {
     const endpoint = `visualize/intraday?type=${value}&date=${date}`
-    return await makeRequest('GET',endpoint, true, false, {})
+    return await makeRequest('GET',endpoint, true, false,)
 
   }
 
