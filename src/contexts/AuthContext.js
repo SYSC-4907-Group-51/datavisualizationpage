@@ -114,7 +114,11 @@ export function AuthProvider({ children }) {
     return await makeRequest('GET',endpoint, true, false, {})
 
   }
-
+  
+ async function refreshAuthKey(){
+    const endpoint = 'visualize/create-key'
+    return await makeRequest('PUT',endpoint, true, false)
+  }
 
 
   const value = {
@@ -127,7 +131,8 @@ export function AuthProvider({ children }) {
     createKey,
     healthCareLogin,
     timeSeriesData,
-    intradayData
+    intradayData,
+    refreshAuthKey
   }
 
   return (
