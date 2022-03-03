@@ -1,17 +1,20 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Avatar, Box, Card, CardContent, Grid, Typography, Button} from '@mui/material';
 import { Form } from 'react-bootstrap'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import MoneyIcon from '@mui/icons-material/Money';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import { useAuth } from "../contexts/AuthContext";
+import { dateRangePickerDayClasses } from "@mui/lab";
 
 
 export const Budget = (props) => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const { intradayData } = useAuth()
+  const { timeSeriesData } = useAuth()
   const step = "step"
+  const heartrate = "heartrate"
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)
   const [stepVal, setStepVal]= useState("")
@@ -19,7 +22,7 @@ export const Budget = (props) => {
   function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
-        day = '' + (d.getDate() -1),
+        day = '' + (d.getDate()),
         year = d.getFullYear();
     if (month.length < 2) 
         month = '0' + month;
@@ -29,12 +32,9 @@ export const Budget = (props) => {
     return [year, month, day].join('-');
 }
 
-  async function getSteps(e) {
-    e.preventDefault()
-  
-    try {
-        setError("")
-        const response = await intradayData(step, formatDate(dateToday))
+useEffect(() => {
+  const getSteps2 = async () => {
+    const response = await intradayData(step, formatDate(dateToday))
         console.log(response)
         if (response.status_code === 200 ){
             // return response.data.steps
@@ -42,12 +42,29 @@ export const Budget = (props) => {
             setStepVal(response.data.time_series.steps)
             return response.data.time_series.steps
         }
-    }
-    catch {
-        setError("Can't get steps")
-    }
+  };
+  getSteps2();
+}, []);
+
+  // async function getSteps(e) {
+  //   e.preventDefault()
   
-  }
+  //   try {
+  //       setError("")
+  //       const response = await intradayData(step, formatDate(dateToday))
+  //       console.log(response)
+  //       if (response.status_code === 200 ){
+  //           // return response.data.steps
+  //           console.log(response.data.time_series.steps)
+  //           setStepVal(response.data.time_series.steps)
+  //           return response.data.time_series.steps
+  //       }
+  //   }
+  //   catch {
+  //       setError("Can't get steps")
+  //   }
+  
+  // }
 
   return (
     <Card
@@ -73,7 +90,7 @@ export const Budget = (props) => {
             variant="h4"
           >
             {stepVal}
-            {/* <Button onClick = {getSteps}>HEY</Button> */}
+            {/* <Button onClick = {getData}>HEY</Button> */}
             {/* <div onLoad = {getSteps}></div> */}
             {/* 2,297 */}
           </Typography>

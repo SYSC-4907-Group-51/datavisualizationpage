@@ -111,7 +111,7 @@ export function AuthProvider({ children }) {
 
   async function timeSeriesData(value,startDate, endDate) {
     const endpoint = `visualize/time-series?type=${value}&start_date=${startDate}&end_date=${endDate}`
-    return await makeRequest('GET',endpoint, true, false, {})
+    return await makeRequest('GET',endpoint, true, false,)
 
   }
   
