@@ -114,7 +114,7 @@ useEffect(() => {
           alignItems: 'center'
         }}
       >
-        <ArrowDownwardIcon color="error" />
+        {/* <ArrowDownwardIcon color="error" />
         <Typography
           color="error"
           sx={{
@@ -129,7 +129,7 @@ useEffect(() => {
           variant="caption"
         >
           Since yesterday
-        </Typography>
+        </Typography> */}
       </Box>
     </CardContent>
   </Card>

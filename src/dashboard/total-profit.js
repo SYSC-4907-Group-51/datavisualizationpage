@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { Avatar, Card, CardContent, Grid, Typography, Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useAuth } from "../contexts/AuthContext";
 
 export const TotalProfit = (props) => {
@@ -10,9 +11,10 @@ export const TotalProfit = (props) => {
   const startDate = new Date()
   startDate.setDate(startDate.getDate() - 2)
   const [error, setError] = useState("")
-  const { timeSeriesData } = useAuth()
+  const { timeSeriesData, intradayData } = useAuth()
   const steps = "step"
-  const [distanceVal, setDistanceVal]= useState("")
+  const heartrate = "heartrate"
+  const [heartrateVal, setHeartRateVal]= useState("")
 
   function formatDate(date) {
     var d = new Date(date),
@@ -27,24 +29,21 @@ export const TotalProfit = (props) => {
     return [year, month, day].join('-');
 }
 
-async function getDistance(e) {
-  e.preventDefault()
+useEffect(() => {
+  const getHeartRate = async () => {
+    const response = await intradayData(heartrate, formatDate(dateToday))
+    console.log(response)
+    if (response.status_code === 400){
+      setHeartRateVal(response.time_series.resting_heartrate)
+    }
+    else {
+      setHeartRateVal("N/A")
+    }
+  };
+  getHeartRate();
+}, []); 
 
-     try {
-         setError("")
-         const response = await timeSeriesData(steps, formatDate(startDate), formatDate(dateToday))
-         console.log(response)
-        //  console.log(response.data[1].efficiency)
-        //  setEfficiencyVal(response.data[1].efficiency)
-        //  if (response.status_code === 200 ){
-        //     setEfficiencyVal(response.data[1].efficiency)  
-        //  }
-     }
-     catch {
-         setError("Can't get steps")
-     }
 
-   }
 
   return (
     <Card {...props}>
@@ -60,14 +59,15 @@ async function getDistance(e) {
             gutterBottom
             variant="overline"
           >
-            {/* Distance */}
-            <Button onClick = {getDistance}>HEY</Button>
+            Resting Heart Rate
+            {/* <Button onClick = {getDistance}>HEY</Button> */}
           </Typography>
           <Typography
             color="textPrimary"
             variant="h4"
           >
-            1.67 Km
+            {/* 1.67 Km */}
+            {heartrateVal} bpm
           </Typography>
         </Grid>
         <Grid item>
@@ -78,7 +78,7 @@ async function getDistance(e) {
               width: 56
             }}
           >
-            <FmdGoodIcon />
+            <FavoriteIcon />
           </Avatar>
         </Grid>
       </Grid>
