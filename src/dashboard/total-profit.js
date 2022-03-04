@@ -33,8 +33,8 @@ useEffect(() => {
   const getHeartRate = async () => {
     const response = await intradayData(heartrate, formatDate(dateToday))
     console.log(response)
-    if (response.status_code === 400){
-      setHeartRateVal(response.time_series.resting_heartrate)
+    if (response.status_code === 200){
+      setHeartRateVal(response.data.time_series.resting_heartrate)
     }
     else {
       setHeartRateVal("N/A")
