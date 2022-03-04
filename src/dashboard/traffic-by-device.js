@@ -1,3 +1,4 @@
+import React, { useRef, useState, useEffect } from "react"
 import { Doughnut } from 'react-chartjs-2';
 import { Box, Card, CardContent, CardHeader, Divider, Typography, useTheme } from '@mui/material';
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
@@ -6,9 +7,52 @@ import TabletIcon from '@mui/icons-material/Tablet';
 import ReactEcharts from "echarts-for-react";
 import AlarmIcon from '@mui/icons-material/Alarm';
 import NotificationsPausedIcon from '@mui/icons-material/NotificationsPaused';
+import { useAuth } from "../contexts/AuthContext";
 
 export const TrafficByDevice = (props) => {
   const theme = useTheme();
+  const dateToday = new Date()
+  dateToday.setDate(dateToday.getDate() -1)
+  const startDate = new Date()
+  startDate.setDate(startDate.getDate() - 2)
+  const [error, setError] = useState("")
+  const { timeSeriesData } = useAuth()
+  const sleep = "sleep"
+  const [efficiencyVal2, setEfficiencyVal2]= useState("")
+  const [awakeVal, setAwakeVal]= useState("")
+  const [deepVal, setDeepVal]= useState("")
+  const [lightVal, setLightVal]= useState("")
+
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + (d.getDate()),
+        year = d.getFullYear();
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+useEffect(() => {
+  const getEfficiency = async () => {
+    const response = await timeSeriesData(sleep, formatDate(startDate), formatDate(dateToday))
+           console.log(response)
+           console.log(response.data[1].summary)
+           if (response.status_code === 200 ){
+              setEfficiencyVal2(response.data[1].efficiency)
+              const awakeValue = ((response.data[1].summary.wake.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
+              const deepValue = ((response.data[1].summary.light.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
+              const lightValue = ((response.data[1].summary.deep.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
+              setAwakeVal(awakeValue)  
+              setDeepVal(deepValue)
+              setLightVal(lightValue)
+           }
+  };
+  getEfficiency();
+}, []);
 
   const data = {
     datasets: [
@@ -48,20 +92,23 @@ export const TrafficByDevice = (props) => {
   const devices = [
     {
       title: 'Awake',
-      value: 23,
+      // value: 23,
+      value: awakeVal,
       icon: AlarmIcon,
       color: '#3F51B5'
     },
     {
       title: 'Light',
-      value: 15,
+      // value: 15,
+      value: lightVal,
       icon: TabletIcon,
       // color: '#E53935'
       color: '#3F51B5'
     },
     {
       title: 'Deep',
-      value: 63,
+      // value: 63,
+      value: deepVal,
       icon: NotificationsPausedIcon,
       // color: '#FB8C00'
       color: '#3F51B5'
@@ -98,7 +145,8 @@ export const TrafficByDevice = (props) => {
             },
             data: [
               {
-                value: 75.5,
+                // value: 75.5,
+                value: efficiencyVal2,
                 name: 'Sleep Rating'
               }
             ]

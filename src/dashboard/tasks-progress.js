@@ -7,9 +7,12 @@ import { useAuth } from "../contexts/AuthContext";
 export const TasksProgress = (props) => {
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)
+  const startDate = new Date()
+  startDate.setDate(startDate.getDate() - 2)
   const [error, setError] = useState("")
   const { timeSeriesData } = useAuth()
   const sleep = "sleep"
+  const [efficiencyVal, setEfficiencyVal]= useState("")
 
   function formatDate(date) {
     var d = new Date(date),
@@ -24,19 +27,30 @@ export const TasksProgress = (props) => {
     return [year, month, day].join('-');
 }
 
+useEffect(() => {
+  const getEfficiency2 = async () => {
+    const response = await timeSeriesData(sleep, formatDate(startDate), formatDate(dateToday))
+           console.log(response)
+           console.log(response.data[1].efficiency)
+           if (response.status_code === 200 ){
+              setEfficiencyVal(response.data[1].efficiency)  
+           }
+  };
+  getEfficiency2();
+}, []);
+
   async function getEfficiency(e) {
     e.preventDefault()
   
        try {
            setError("")
-           const response = await timeSeriesData(sleep, formatDate(dateToday), formatDate(dateToday))
+           const response = await timeSeriesData(sleep, formatDate(startDate), formatDate(dateToday))
            console.log(response)
-  //       if (response.status_code === 200 ){
-  //           // return response.data.steps
-  //           console.log(response.data.time_series.steps)
-  //           setStepVal(response.data.time_series.steps)
-  //           return response.data.time_series.steps
-  //       }
+           console.log(response.data[1].efficiency)
+           setEfficiencyVal(response.data[1].efficiency)
+           if (response.status_code === 200 ){
+              setEfficiencyVal(response.data[1].efficiency)  
+           }
        }
        catch {
            setError("Can't get steps")
@@ -61,14 +75,15 @@ export const TasksProgress = (props) => {
             gutterBottom
             variant="overline"
           >
-            {/* Sleep Efficiency */}
-            <Button onClick = {getEfficiency}>HEY</Button>
+            Sleep Efficiency
+            {/* <Button onClick = {getEfficiency}>HEY</Button> */}
+            {/* {efficiencyVal} */}
           </Typography>
           <Typography
             color="textPrimary"
             variant="h4"
           >
-            75.5%
+            {efficiencyVal}%
           </Typography>
         </Grid>
         <Grid item>
@@ -85,7 +100,7 @@ export const TasksProgress = (props) => {
       </Grid>
       <Box sx={{ pt: 3 }}>
         <LinearProgress
-          value={75.5}
+          value={efficiencyVal}
           variant="determinate"
         />
       </Box>
