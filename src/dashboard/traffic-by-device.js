@@ -138,7 +138,7 @@ useEffect(() => {
         },
         series: [
           {
-            name: 'Pressure',
+            name: 'Rating',
             type: 'gauge',
             detail: {
               formatter: '{value}'
