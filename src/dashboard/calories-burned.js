@@ -63,7 +63,7 @@ export const CaloriesBurned = (props) => {
             endIcon={<ArrowDropDownIcon fontSize="small" />}
             size="small"
           >
-            Last 7 days
+            Year
           </Button>
         )}
         title="Calories Burned"
@@ -130,7 +130,7 @@ export const CaloriesBurned = (props) => {
         }}
       />
       </CardContent>
-      <Divider />
+      {/* <Divider /> */}
       <Box
         sx={{
           display: 'flex',

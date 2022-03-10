@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {
   Box,
   Button,
@@ -128,7 +129,16 @@ export const LatestOrders = (props) =>{
     
   return (
     <Card {...props}>
-    <CardHeader title="Activity Steps" />
+    <CardHeader
+    action={(
+      <Button
+        endIcon={<ArrowDropDownIcon fontSize="small" />}
+        size="small"
+      >
+        Year
+      </Button>
+    )} 
+    title="Activity Steps" />
     <CardContent>
     <ReactEcharts
       option={{

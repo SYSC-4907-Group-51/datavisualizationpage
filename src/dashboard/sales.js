@@ -84,7 +84,7 @@ export const Sales = (props) => {
             endIcon={<ArrowDropDownIcon fontSize="small" />}
             size="small"
           >
-            Last 7 days
+            Year
           </Button>
         )}
         title="Resting Heart Rate"
