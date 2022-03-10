@@ -156,8 +156,8 @@ export const LatestOrders = (props) =>{
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 1,
-            end: 12
+            start: 98.2,
+            end: 100
           },
         ],
         toolbox: {
