@@ -118,7 +118,7 @@ const gaugeData = [
 
   return (
     <Card {...props}>
-      <CardHeader title="Sleep Score" />
+    <CardHeader subheader= {formatDate(dateToday)} title= "Sleep Score"/>
       <Divider />
       <CardContent>
         {/* <Box
