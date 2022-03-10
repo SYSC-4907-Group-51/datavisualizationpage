@@ -9,6 +9,7 @@ import { TotalCustomers } from '../dashboard/total-customers';
 import { TotalProfit } from '../dashboard/total-profit';
 import { TrafficByDevice } from '../dashboard/traffic-by-device';
 import { DashboardLayout } from '../dashboard-layout';
+import { CaloriesBurned } from '../dashboard/calories-burned';
 import ReactEcharts from "echarts-for-react";
 
 
@@ -74,7 +75,7 @@ const Dashboard = () => (
             xl={9}
             xs={12}
           >
-            <Sales />
+            <Sales sx={{ height: '100%' }}/>
           </Grid>
           <Grid
             item
@@ -85,7 +86,7 @@ const Dashboard = () => (
           >
             <TrafficByDevice sx={{ height: '100%' }} />
           </Grid>
-          <Grid
+          {/* <Grid
             item
             lg={4}
             md={6}
@@ -93,15 +94,24 @@ const Dashboard = () => (
             xs={12}
           >
             <LatestProducts sx={{ height: '100%' }} />
+          </Grid> */}
+          <Grid
+            item
+            lg={12}
+            md={18}
+            xl={12}
+            xs={24}
+          >
+            <LatestOrders />
           </Grid>
           <Grid
             item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
+            lg={12}
+            md={18}
+            xl={12}
+            xs={24}
           >
-            <LatestOrders />
+            <CaloriesBurned />
           </Grid>
         </Grid>
       </Container>

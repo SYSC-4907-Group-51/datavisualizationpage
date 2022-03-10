@@ -54,18 +54,19 @@ useEffect(() => {
   getEfficiency();
 }, []);
 
-  const data = {
-    datasets: [
-      {
-        data: [63, 15, 22],
-        backgroundColor: ['#3F51B5', '#e53935', '#FB8C00'],
-        borderWidth: 8,
-        borderColor: '#FFFFFF',
-        hoverBorderColor: '#FFFFFF'
-      }
-    ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
-  };
+const gaugeData = [
+  {
+    value: efficiencyVal2,
+    name: 'Sleep Score',
+    title: {
+      offsetCenter: ['0%', '-20%']
+    },
+    detail: {
+      valueAnimation: true,
+      offsetCenter: ['0%', '10%']
+    }
+  },
+];
 
   const options = {
     animation: false,
@@ -132,27 +133,80 @@ useEffect(() => {
           />
         </Box> */}
         <ReactEcharts
-      option={{
-        tooltip: {
-          formatter: '{a} <br/>{b} : {c}%',
-        },
-        series: [
-          {
-            name: 'Rating',
-            type: 'gauge',
-            detail: {
-              formatter: '{value}'
-            },
-            data: [
-              {
-                // value: 75.5,
-                value: efficiencyVal2,
-                name: 'Sleep Rating'
+        option = {{
+          series: [
+            {
+              type: 'gauge',
+              startAngle: 90,
+              endAngle: -270,
+              pointer: {
+                show: false
+              },
+              progress: {
+                show: true,
+                overlap: false,
+                roundCap: true,
+                clip: false,
+                itemStyle: {
+                  borderWidth: 1,
+                  borderColor: '#464646'
+                }
+              },
+              axisLine: {
+                lineStyle: {
+                  width: 10
+                }
+              },
+              splitLine: {
+                show: false,
+                distance: 0,
+                length: 10
+              },
+              axisTick: {
+                show: false
+              },
+              axisLabel: {
+                show: false,
+                distance: 50
+              },
+              data: gaugeData,
+              title: {
+                fontSize: 14
+              },
+              detail: {
+                width: 50,
+                height: 14,
+                fontSize: 14,
+                color: 'auto',
+                borderColor: 'auto',
+                borderRadius: 20,
+                borderWidth: 1,
+                formatter: '{value}%'
               }
-            ]
-          }
-        ]
+            }
+          ]
         }}
+      // option={{
+      //   tooltip: {
+      //     formatter: '{a} <br/>{b} : {c}%',
+      //   },
+      //   series: [
+      //     {
+      //       name: 'Rating',
+      //       type: 'gauge',
+      //       detail: {
+      //         formatter: '{value}'
+      //       },
+      //       data: [
+      //         {
+      //           // value: 75.5,
+      //           value: efficiencyVal2,
+      //           name: 'Sleep Rating'
+      //         }
+      //       ]
+      //     }
+      //   ]
+      //   }}
       />
         <Box
           sx={{

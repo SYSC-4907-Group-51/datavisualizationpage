@@ -63,7 +63,9 @@ useEffect(() => {
 //    }
 
   return(
-    <Card {...props}>
+    <Card
+    sx={{ height: '100%' }} 
+    {...props}>
     <CardContent>
       <Grid
         container
