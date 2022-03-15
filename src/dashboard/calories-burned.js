@@ -37,6 +37,9 @@ export const CaloriesBurned = (props) => {
       const getCalories = async () => {
         const response = await timeSeriesData(heartrate, "2022-01-01", formatDate(dateToday))
         console.log(response)
+        if(response.status_code === 203){
+          <Dashboard caloriesAccess = {false}/>
+        }
         for (var i = 0; i < response.data.length; i++) {
           var caloriesTotal = 0;
           var dateVal = response.data[i].date;
@@ -50,6 +53,7 @@ export const CaloriesBurned = (props) => {
           // dateArray.push(dateVal)
           // console.log(heartrateVal.resting_heartrate);
         }
+        <Dashboard caloriesAccess = {true}/>
         // console.log(dateArray)
         // console.log(heartRateArray)
       };

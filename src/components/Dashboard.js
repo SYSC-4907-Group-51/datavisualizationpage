@@ -10,11 +10,11 @@ import { TotalProfit } from '../dashboard/total-profit';
 import { TrafficByDevice } from '../dashboard/traffic-by-device';
 import { DashboardLayout } from '../dashboard-layout';
 import { CaloriesBurned } from '../dashboard/calories-burned';
-import ReactEcharts from "echarts-for-react";
 
 
-const Dashboard = () => (
-  <>
+export default function Dashboard(props){
+  return (
+    <>
     <Head>
       <title>
         Dashboard | Material Kit
@@ -68,7 +68,7 @@ const Dashboard = () => (
           >
             <TotalProfit sx={{ height: '100%' }} />
           </Grid>
-          <Grid
+          {props.caloriesAccess === true && <Grid
             item
             lg={8}
             md={12}
@@ -76,7 +76,7 @@ const Dashboard = () => (
             xs={12}
           >
             <Sales sx={{ height: '100%' }}/>
-          </Grid>
+          </Grid>}
           <Grid
             item
             lg={4}
@@ -95,7 +95,7 @@ const Dashboard = () => (
           >
             <LatestProducts sx={{ height: '100%' }} />
           </Grid> */}
-          <Grid
+          {props.stepsVal2===true && <Grid
             item
             lg={12}
             md={18}
@@ -103,8 +103,8 @@ const Dashboard = () => (
             xs={24}
           >
             <LatestOrders />
-          </Grid>
-          <Grid
+          </Grid>}
+          {props.caloriesAccess === true && <Grid
             item
             lg={12}
             md={18}
@@ -112,12 +112,12 @@ const Dashboard = () => (
             xs={24}
           >
             <CaloriesBurned />
-          </Grid>
+          </Grid>}
         </Grid>
       </Container>
     </Box>
-  </>
-);
+  </>  
+)}
 
 Dashboard.getLayout = (page) => (
   <DashboardLayout>
@@ -125,7 +125,7 @@ Dashboard.getLayout = (page) => (
   </DashboardLayout>
 );
 
-export default Dashboard;
+// export default Dashboard;
 
 
 

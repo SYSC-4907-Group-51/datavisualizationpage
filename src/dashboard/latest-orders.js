@@ -114,7 +114,7 @@ export const LatestOrders = (props) =>{
         const response = await timeSeriesData(steps, "2022-01-01", formatDate(dateToday))
         console.log(response)
         if(response.status_code === 203){
-          <Dashboard steps = "No permission"/>
+          <Dashboard stepsVal2 = {false}/>
         }
         for (var i = 0; i < response.data.length; i++) {
           var stepsVal = response.data[i].steps;
@@ -125,6 +125,7 @@ export const LatestOrders = (props) =>{
         //   // dateArray.push(dateVal)
         //   // console.log(heartrateVal.resting_heartrate);
         }
+        <Dashboard stepsVal2 = {true}/>
         // console.log(dateArray)
         // console.log(heartRateArray)
       };

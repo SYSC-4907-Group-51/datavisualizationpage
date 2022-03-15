@@ -41,6 +41,8 @@ useEffect(() => {
             console.log(response.data.time_series.steps)
             setStepVal(response.data.time_series.steps)
             return response.data.time_series.steps
+        } else {
+          setStepVal("N/A")
         }
   };
   getSteps2();
