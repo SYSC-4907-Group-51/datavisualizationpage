@@ -6,6 +6,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ReactEcharts from "echarts-for-react";
 import { store } from "../App";
 import { useAuth } from "../contexts/AuthContext";
+import Dashboard from "../components/Dashboard";
 
 
 export const CaloriesBurned = (props) => {
@@ -97,7 +98,7 @@ export const CaloriesBurned = (props) => {
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 99.6,
+            start: 97,
             end: 100
           },
         ],

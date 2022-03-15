@@ -22,6 +22,7 @@ import ReactEcharts from "echarts-for-react";
 import { store } from "../App";
 import { useAuth } from "../contexts/AuthContext";
 import { useEffect, useState} from 'react';
+import Dashboard from '../components/Dashboard';
 
 const orders = [
   {
@@ -112,6 +113,9 @@ export const LatestOrders = (props) =>{
       const getActivitySteps = async () => {
         const response = await timeSeriesData(steps, "2022-01-01", formatDate(dateToday))
         console.log(response)
+        if(response.status_code === 203){
+          <Dashboard steps = "No permission"/>
+        }
         for (var i = 0; i < response.data.length; i++) {
           var stepsVal = response.data[i].steps;
           var dateVal = response.data[i].date;
@@ -156,7 +160,7 @@ export const LatestOrders = (props) =>{
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 98.2,
+            start: 98.5,
             end: 100
           },
         ],

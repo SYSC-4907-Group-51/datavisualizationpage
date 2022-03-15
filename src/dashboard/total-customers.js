@@ -31,13 +31,19 @@ export const TotalCustomers = (props) => {
 useEffect(() => {
   const getCalories2 = async () => {
     const response = await intradayData(heartrate, formatDate(dateToday))
-         console.log(response)
+        if(response.status_code === 200){
+          console.log(response)
 
          for (var i = 0; i < response.data.time_series.heartrate_zones.length; i++) {
           caloriesTotal += response.data.time_series.heartrate_zones[i].caloriesOut
         }
         console.log(caloriesTotal)
         setCaloriesVal(Math.round(caloriesTotal))
+
+        }
+        else{
+          setCaloriesVal("N/A")
+        }
   };
   getCalories2();
 }, []); 

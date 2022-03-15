@@ -31,9 +31,11 @@ useEffect(() => {
   const getEfficiency2 = async () => {
     const response = await timeSeriesData(sleep, formatDate(startDate), formatDate(dateToday))
            console.log(response)
-           console.log(response.data[1].efficiency)
            if (response.status_code === 200 ){
-              setEfficiencyVal(response.data[1].efficiency)  
+              console.log(response.data[0].efficiency)
+              setEfficiencyVal(response.data[0].efficiency)  
+           } else {
+             setEfficiencyVal("N/A")
            }
   };
   getEfficiency2();

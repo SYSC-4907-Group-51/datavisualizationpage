@@ -40,16 +40,21 @@ useEffect(() => {
   const getEfficiency = async () => {
     const response = await timeSeriesData(sleep, formatDate(startDate), formatDate(dateToday))
            console.log(response)
-           console.log(response.data[1].summary)
+          //  console.log(response.data[0].summary)
            if (response.status_code === 200 ){
-              setEfficiencyVal2(response.data[1].efficiency)
-              const awakeValue = ((response.data[1].summary.wake.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
-              const deepValue = ((response.data[1].summary.light.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
-              const lightValue = ((response.data[1].summary.deep.minutes *1.0/ response.data[1].time_in_bed) * 100).toPrecision(2)
+              setEfficiencyVal2(response.data[0].efficiency)
+              const awakeValue = ((response.data[0].summary.wake.minutes *1.0/ response.data[0].time_in_bed) * 100).toPrecision(2)
+              const deepValue = ((response.data[0].summary.light.minutes *1.0/ response.data[0].time_in_bed) * 100).toPrecision(2)
+              const lightValue = ((response.data[0].summary.deep.minutes *1.0/ response.data[0].time_in_bed) * 100).toPrecision(2)
               setAwakeVal(awakeValue)  
               setDeepVal(deepValue)
               setLightVal(lightValue)
            }
+          //  } else{
+          //   setAwakeVal("N/A")  
+          //   setDeepVal("N/A")
+          //   setLightVal("N/A")
+          //  }
   };
   getEfficiency();
 }, []);
