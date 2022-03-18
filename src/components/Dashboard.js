@@ -68,7 +68,7 @@ export default function Dashboard(props){
           >
             <TotalProfit sx={{ height: '100%' }} />
           </Grid>
-          {props.caloriesAccess === true && <Grid
+          {<Grid
             item
             lg={8}
             md={12}
@@ -95,7 +95,7 @@ export default function Dashboard(props){
           >
             <LatestProducts sx={{ height: '100%' }} />
           </Grid> */}
-          {props.stepsVal2===true && <Grid
+          {<Grid
             item
             lg={12}
             md={18}
@@ -104,7 +104,7 @@ export default function Dashboard(props){
           >
             <LatestOrders />
           </Grid>}
-          {props.caloriesAccess === true && <Grid
+          {<Grid
             item
             lg={12}
             md={18}

@@ -161,7 +161,7 @@ export const LatestOrders = (props) =>{
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 98.5,
+            start: 98,
             end: 100
           },
         ],
@@ -260,14 +260,14 @@ export const LatestOrders = (props) =>{
         p: 2
       }}
     >
-      <Button
+      {/* <Button
         color="primary"
         endIcon={<ArrowRightIcon fontSize="small" />}
         size="small"
         variant="text"
       >
         View all
-      </Button>
+      </Button> */}
     </Box>
   </Card>
   );

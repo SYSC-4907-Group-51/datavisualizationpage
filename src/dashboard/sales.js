@@ -118,7 +118,7 @@ export const Sales = (props) => {
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 99.1,
+            start: 98,
             end: 100
           },
         ],
@@ -159,13 +159,13 @@ export const Sales = (props) => {
           p: 2
         }}
       >
-        <Button
+        {/* <Button
           color="primary"
           endIcon={<ArrowRightIcon fontSize="small" />}
           size="small"
         >
           More Health Metrics
-        </Button>
+        </Button> */}
       </Box>
     </Card>
   );

@@ -102,7 +102,7 @@ export const CaloriesBurned = (props) => {
             type: 'slider',
             show: true,
             xAxisIndex: [0],
-            start: 97,
+            start: 96,
             end: 100
           },
         ],
