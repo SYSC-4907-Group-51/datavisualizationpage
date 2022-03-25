@@ -95,6 +95,7 @@ export const LatestOrders = (props) =>{
   const steps = "step"
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)
+  const [error, setError] = useState("")
 
   function formatDate(date) {
     var d = new Date(date),
@@ -131,17 +132,46 @@ export const LatestOrders = (props) =>{
       };
       getActivitySteps();
     }, []);
+
+    async function lastYearActivity(e) {
+      e.preventDefault()
+    
+      try {
+          setError("")
+          const response = await timeSeriesData(steps, "2021-01-01", "2021-12-30")
+          console.log(response)
+          for (var i = 0; i < response.data.length; i++) {
+            var stepsVal = response.data[i].steps;
+            var dateVal = response.data[i].date;
+            setDateArray(dateArray => [...dateArray, dateVal]);
+            setActivityStepArray(activityStepArray => [...activityStepArray, stepsVal]);
+          //   // heartRateArray.push(heartrateVal)
+          //   // dateArray.push(dateVal)
+          //   // console.log(heartrateVal.resting_heartrate);
+          }
+          // console.log(dataArray)
+          // console.log(dateArray)
+      }
+      catch {
+          setError("Can't get steps")
+      }
+    }
     
   return (
     <Card {...props}>
     <CardHeader
     action={(
-      <Button
-        endIcon={<ArrowDropDownIcon fontSize="small" />}
-        size="small"
-      >
-        Year
-      </Button>
+      <div>
+          <Button
+            endIcon={<ArrowDropDownIcon fontSize="small" />}
+            size="small"
+          >
+            Year
+          </Button>
+          <div>
+              <Button onclick = {lastYearActivity} size = "small">2021</Button>
+          </div>
+          </div>
     )} 
     title="Activity Steps" />
     <CardContent>

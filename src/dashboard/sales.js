@@ -20,6 +20,10 @@ export const Sales = (props) => {
   dateToday.setDate(dateToday.getDate() -1)
   const [error, setError] = useState("")
 
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
   function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -73,6 +77,30 @@ export const Sales = (props) => {
     catch {
         setError("Can't get steps")
     }
+  }
+
+    async function lastYearRate(e) {
+      e.preventDefault()
+    
+      try {
+          setError("")
+          const response = await timeSeriesData(heartrate, "2021-01-01", "2021-12-30")
+          console.log(response)
+          for (var i = 0; i < response.data.length; i++) {
+            var heartrateVal = response.data[i].resting_heartrate;
+            var dateVal = response.data[i].date;
+            setDateArray(dateArray => [...dateArray, dateVal]);
+            setHeartRateArray(heartRateArray => [...heartRateArray, heartrateVal]);
+            // heartRateArray.push(heartrateVal)
+            // dateArray.push(dateVal)
+            // console.log(heartrateVal.resting_heartrate);
+          }
+          // console.log(dataArray)
+          // console.log(dateArray)
+      }
+      catch {
+          setError("Can't get steps")
+      }
   
   }
 
@@ -80,12 +108,32 @@ export const Sales = (props) => {
     <Card {...props}>
       <CardHeader
         action={(
+          // <Button
+          //   endIcon={<ArrowDropDownIcon fontSize="small" />}
+          //   size="small"
+
+          // >
+          //   Year
+          // </Button>
+
+          <div>
           <Button
             endIcon={<ArrowDropDownIcon fontSize="small" />}
             size="small"
           >
             Year
           </Button>
+          <div>
+              <Button size = "small">2021</Button>
+          </div>
+          </div>
+
+          // <div class="dropdown">
+          // <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size = "small" onclick= {myFunction} class="dropbtn">Year</Button>
+          // <div id="myDropdown" class="dropdown-content hide">
+          // <Button size = "small" onclick={lastYearRate}>2021</Button>
+          // </div>
+          // </div>
         )}
         title="Resting Heart Rate"
       />

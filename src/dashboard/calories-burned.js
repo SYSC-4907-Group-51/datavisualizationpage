@@ -64,12 +64,17 @@ export const CaloriesBurned = (props) => {
     <Card {...props}>
       <CardHeader
         action={(
+          <div>
           <Button
             endIcon={<ArrowDropDownIcon fontSize="small" />}
             size="small"
           >
             Year
           </Button>
+          <div>
+              <Button size = "small">2021</Button>
+          </div>
+          </div>
         )}
         title="Calories Burned"
       />
