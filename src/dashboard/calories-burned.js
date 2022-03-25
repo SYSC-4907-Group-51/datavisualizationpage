@@ -40,6 +40,8 @@ export const CaloriesBurned = (props) => {
         if(response.status_code === 203){
           <Dashboard caloriesAccess = {false}/>
         }
+        setDateArray([])
+        setCaloriesBurnedArray([])
         for (var i = 0; i < response.data.length; i++) {
           var caloriesTotal = 0;
           var dateVal = response.data[i].date;
@@ -60,6 +62,37 @@ export const CaloriesBurned = (props) => {
       getCalories();
     }, []);
 
+    async function lastYearCalories(e) {
+      e.preventDefault()
+    
+      try {
+          setError("")
+          const response = await timeSeriesData(heartrate, "2021-01-01", "2021-12-30")
+          console.log(response)
+          setDateArray([])
+          setCaloriesBurnedArray([])
+          for (var i = 0; i < response.data.length; i++) {
+            var caloriesTotal = 0;
+            var dateVal = response.data[i].date;
+            for (var j = 0; j < response.data[i].heartrate_zones.length; j++) {
+              caloriesTotal += response.data[i].heartrate_zones[j].caloriesOut
+            }
+            Math.round(caloriesTotal)
+            setDateArray(dateArray => [...dateArray, dateVal]);
+            setCaloriesBurnedArray(caloriesBurnedArray => [...caloriesBurnedArray, Math.round(caloriesTotal)]);
+            // heartRateArray.push(heartrateVal)
+            // dateArray.push(dateVal)
+            // console.log(heartrateVal.resting_heartrate);
+          }
+          // console.log(dataArray)
+          // console.log(dateArray)
+      }
+      catch {
+          setError("Can't get steps")
+      }
+  
+  }
+
   return (
     <Card {...props}>
       <CardHeader
@@ -72,7 +105,7 @@ export const CaloriesBurned = (props) => {
             Year
           </Button>
           <div>
-              <Button size = "small">2021</Button>
+              <Button onClick={lastYearCalories} size = "small">2021</Button>
           </div>
           </div>
         )}

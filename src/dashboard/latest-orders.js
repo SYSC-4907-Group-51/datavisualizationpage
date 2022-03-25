@@ -117,6 +117,8 @@ export const LatestOrders = (props) =>{
         if(response.status_code === 203){
           <Dashboard stepsVal2 = {false}/>
         }
+        setDateArray([])
+        setActivityStepArray([])
         for (var i = 0; i < response.data.length; i++) {
           var stepsVal = response.data[i].steps;
           var dateVal = response.data[i].date;
@@ -140,6 +142,8 @@ export const LatestOrders = (props) =>{
           setError("")
           const response = await timeSeriesData(steps, "2021-01-01", "2021-12-30")
           console.log(response)
+          setDateArray([])
+          setActivityStepArray([])
           for (var i = 0; i < response.data.length; i++) {
             var stepsVal = response.data[i].steps;
             var dateVal = response.data[i].date;
@@ -169,7 +173,7 @@ export const LatestOrders = (props) =>{
             Year
           </Button>
           <div>
-              <Button onclick = {lastYearActivity} size = "small">2021</Button>
+              <Button onClick = {lastYearActivity} size = "small">2021</Button>
           </div>
           </div>
     )} 

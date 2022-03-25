@@ -40,7 +40,10 @@ export const Sales = (props) => {
     useEffect(() => {
       const getData2 = async () => {
         const response = await timeSeriesData(heartrate, "2022-01-01", formatDate(dateToday))
+        //const response = await timeSeriesData(heartrate, "2021-01-01", "2021-12-30")
         console.log(response)
+        setDateArray([])
+        setHeartRateArray([])
         for (var i = 0; i < response.data.length; i++) {
           var heartrateVal = response.data[i].resting_heartrate;
           var dateVal = response.data[i].date;
@@ -86,6 +89,8 @@ export const Sales = (props) => {
           setError("")
           const response = await timeSeriesData(heartrate, "2021-01-01", "2021-12-30")
           console.log(response)
+          setDateArray([])
+          setHeartRateArray([])
           for (var i = 0; i < response.data.length; i++) {
             var heartrateVal = response.data[i].resting_heartrate;
             var dateVal = response.data[i].date;
@@ -124,7 +129,7 @@ export const Sales = (props) => {
             Year
           </Button>
           <div>
-              <Button size = "small">2021</Button>
+              <Button onClick={lastYearRate} size = "small">2021</Button>
           </div>
           </div>
 
