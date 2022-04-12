@@ -5,7 +5,7 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useAuth } from "../contexts/AuthContext";
 
-export const TotalProfit = (props) => {
+export const HeartRateIntraday = (props) => {
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)
   const startDate = new Date()

@@ -5,7 +5,7 @@ import PeopleIcon from '@mui/icons-material/PeopleOutlined';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import { useAuth } from "../contexts/AuthContext";
 
-export const TotalCustomers = (props) => {
+export const CaloriesIntraday = (props) => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const { intradayData } = useAuth()

@@ -87,7 +87,7 @@ const orders = [
   }
 ];
 
-export const LatestOrders = (props) =>{
+export const StepsTimeSeries = (props) =>{
   const state = store.getState();
   const [dateArray, setDateArray] = useState([]);
   const [activityStepArray, setActivityStepArray] = useState([]);

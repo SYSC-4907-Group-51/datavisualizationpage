@@ -9,7 +9,7 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import NotificationsPausedIcon from '@mui/icons-material/NotificationsPaused';
 import { useAuth } from "../contexts/AuthContext";
 
-export const TrafficByDevice = (props) => {
+export const SleepEfficiency = (props) => {
   const theme = useTheme();
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)

@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { dateRangePickerDayClasses } from "@mui/lab";
 
 
-export const Budget = (props) => {
+export const StepsIntraday = (props) => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const { intradayData } = useAuth()

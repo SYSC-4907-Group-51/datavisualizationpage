@@ -4,7 +4,7 @@ import InsertChartIcon from '@mui/icons-material/InsertChartOutlined';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import { useAuth } from "../contexts/AuthContext";
 
-export const TasksProgress = (props) => {
+export const SleepIntraday = (props) => {
   const dateToday = new Date()
   dateToday.setDate(dateToday.getDate() -1)
   const startDate = new Date()

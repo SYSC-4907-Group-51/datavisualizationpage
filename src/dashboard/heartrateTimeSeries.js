@@ -9,7 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 
 
-export const Sales = (props) => {
+export const HeartRateTimeSeries = (props) => {
   const theme = useTheme();
   const state = store.getState();
   const [dateArray, setDateArray] = useState([]);

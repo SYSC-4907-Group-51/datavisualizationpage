@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import { Box, Container, Grid } from '@mui/material';
-import { Budget } from '../dashboard/budget';
-import { LatestOrders } from '../dashboard/latest-orders';
+import { StepsIntraday } from '../dashboard/stepsIntraday';
+import { StepsTimeSeries } from '../dashboard/stepsTimeSeries';
 import { LatestProducts } from '../dashboard/latest-products';
-import { Sales } from '../dashboard/sales';
-import { TasksProgress } from '../dashboard/tasks-progress';
-import { TotalCustomers } from '../dashboard/total-customers';
-import { TotalProfit } from '../dashboard/total-profit';
-import { TrafficByDevice } from '../dashboard/traffic-by-device';
+import { HeartRateTimeSeries } from '../dashboard/heartrateTimeSeries';
+import { SleepIntraday } from '../dashboard/sleepIntraday';
+import { CaloriesIntraday } from '../dashboard/caloriesIntraday';
+import { HeartRateIntraday } from '../dashboard/heartrateIntraday';
+import { SleepEfficiency } from '../dashboard/sleepEfficiency';
 import { DashboardLayout } from '../dashboard-layout';
 import { CaloriesBurned } from '../dashboard/calories-burned';
 
@@ -39,7 +39,7 @@ export default function Dashboard(props){
             xl={3}
             xs={12}
           >
-            <Budget />
+            <StepsIntraday />
           </Grid>
           <Grid
             item
@@ -48,7 +48,7 @@ export default function Dashboard(props){
             sm={6}
             xs={12}
           >
-            <TotalCustomers />
+            <CaloriesIntraday />
           </Grid>
           <Grid
             item
@@ -57,7 +57,7 @@ export default function Dashboard(props){
             sm={6}
             xs={12}
           >
-            <TasksProgress />
+            <SleepIntraday />
           </Grid>
           <Grid
             item
@@ -66,7 +66,7 @@ export default function Dashboard(props){
             sm={6}
             xs={12}
           >
-            <TotalProfit sx={{ height: '100%' }} />
+            <HeartRateIntraday sx={{ height: '100%' }} />
           </Grid>
           {<Grid
             item
@@ -75,7 +75,7 @@ export default function Dashboard(props){
             xl={9}
             xs={12}
           >
-            <Sales sx={{ height: '100%' }}/>
+            <HeartRateTimeSeries sx={{ height: '100%' }}/>
           </Grid>}
           <Grid
             item
@@ -84,7 +84,7 @@ export default function Dashboard(props){
             xl={3}
             xs={12}
           >
-            <TrafficByDevice sx={{ height: '100%' }} />
+            <SleepEfficiency sx={{ height: '100%' }} />
           </Grid>
           {/* <Grid
             item
@@ -102,7 +102,7 @@ export default function Dashboard(props){
             xl={12}
             xs={24}
           >
-            <LatestOrders />
+            <StepsTimeSeries />
           </Grid>}
           {<Grid
             item
