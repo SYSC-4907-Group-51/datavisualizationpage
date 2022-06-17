@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
     }
     try {
        
-      const response = await fetch(`https://cap-api.gura.ch/${endpoint}`, {
+      const response = await fetch(`https://cap-api.sce.carleton.ca/${endpoint}`, {
         method,
         headers,
         body: JSON.stringify(body) || undefined,
